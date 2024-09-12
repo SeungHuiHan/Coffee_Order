@@ -2,6 +2,7 @@ package edu.example.gccoffee.service;
 
 
 import edu.example.gccoffee.dto.ProductDTO;
+import edu.example.gccoffee.entity.Category;
 import edu.example.gccoffee.entity.Product;
 import edu.example.gccoffee.exception.ProductException;
 import edu.example.gccoffee.repository.ProductRepository;
@@ -21,7 +22,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
 
-    //상품 등록
+    //상품 등록 api
     public ProductDTO register(ProductDTO productDTO) {
         try{
             Product product =productDTO.toEntity(); //입력받은 데이터를 DB에 넣기 위해서 dto를 entity로 변환
@@ -32,6 +33,12 @@ public class ProductService {
             throw ProductException.NOT_REGISTERED.get();   //예외 메시지를 Product NOT Registered로 저장하여
         }
         //ProductTackException 발생시키기
+    }
+
+    //상품등록 view
+    public void register(String productName, Category category, long price, String description) {
+        Product product = new Product(productName, category, price, description);
+        productRepository.save(product); // Product 엔티티를 DB에 저장
     }
 
     //상품 조회
@@ -76,15 +83,9 @@ public class ProductService {
         }
     }
 
-
     //상품  리스트
     public List<Product> findAll() {
         return productRepository.findAll();
     }
-
-
-
-
-
 
 }

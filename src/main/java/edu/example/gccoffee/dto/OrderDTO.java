@@ -1,5 +1,6 @@
 package edu.example.gccoffee.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import edu.example.gccoffee.entity.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,10 +18,10 @@ public class OrderDTO {
     private Email email;
     private String address;
     private String  postcode;
-    //private List<OrderItemDTO> orderItems;
     private List<OrderItemDTO> orderItems=new ArrayList<>();
-   // private Long productId;//상품 id
 
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private OrderStatus orderStatus;
 
 
@@ -41,7 +42,7 @@ public class OrderDTO {
                 .email(email)
                 .address(address)
                 .postcode(postcode)
-                .orderStatus(orderStatus)
+                .orderStatus(this.orderStatus != null ? this.orderStatus : OrderStatus.ACCPTED) // 기본값 설정
                 .build();
 
         // orderItems가 null이 아니고, 비어 있지 않을 경우만 처리

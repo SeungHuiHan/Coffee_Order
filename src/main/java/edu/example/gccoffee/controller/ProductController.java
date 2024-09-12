@@ -6,20 +6,19 @@ import edu.example.gccoffee.entity.Product;
 import edu.example.gccoffee.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
+
 
 @Controller
 @RequiredArgsConstructor
 @Log4j2
 public class ProductController {
     private final ProductService productService;
-    //http://localhost:8080/products
+    //GET http://localhost:8080/products
     @GetMapping("/products")
     public String listProducts(Model model) {
         System.out.println("/products/product-list ");
@@ -36,4 +35,14 @@ public class ProductController {
         return "new-product";
     }
 
+    //submit버튼 누르면 product-list로 돌아감
+    @PostMapping("/products")
+    public String newProduct(ProductDTO productDTO) {
+        productService.register(
+                productDTO.getProductName(),
+                productDTO.getCategory(),
+                productDTO.getPrice(),
+                productDTO.getDescription());
+        return "redirect:/products";
+    }
 }

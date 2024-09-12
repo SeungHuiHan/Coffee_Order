@@ -12,14 +12,14 @@ import java.util.regex.Pattern;
 @EqualsAndHashCode
 @ToString
 public class Email {
-    private String address;
+    private String email;
 
     public Email(String address) {
         Assert.notNull(address, "Email address must not be null");
         Assert.isTrue(address.length() >=0  && address.length()<=50, "Email address must be between 4 and 50 characters");
 
         Assert.isTrue(checkAddress(address),"Invalid email address");
-        this.address = address;
+        this.email = address;
     }
 
     private static boolean checkAddress(String address) {

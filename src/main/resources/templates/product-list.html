@@ -10,6 +10,7 @@
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
     <title>Grids & Circles</title>
+
 </head>
 <body class="container-fluid">
 <h1>Grids & Circles</h1>
@@ -36,8 +37,8 @@
         <td th:text="${product.category}"></td>
         <td th:text="${product.price}"></td>
         <td th:text="${product.description}"></td>
-<!--        <td th:text="*{createdAt}"></td>-->
-<!--        <td th:text="*{updatedAt}"></td>-->
+<!--        <td th:text="*{product.createdAt}"></td>-->
+<!--        <td th:text="*{product.updatedAt}"></td>-->
     </tr>
     </tbody>
 </table>

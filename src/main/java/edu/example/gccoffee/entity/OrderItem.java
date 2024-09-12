@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name="order_items",
         indexes = @Index(columnList = "order_order_id"))
 @Getter
-@ToString(exclude = {"product","order"})
+@ToString(exclude = {"product","order"}) //무한순환
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

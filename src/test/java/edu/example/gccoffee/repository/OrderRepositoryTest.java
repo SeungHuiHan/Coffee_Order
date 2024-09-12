@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,7 +67,7 @@ class OrderRepositoryTest {
         assertNotNull(savedOrder);
     }
 
-    @Test
+    @Test //이메일로 고객의 주문 목록 확인
     @Transactional
     public void testGetOrderItems() {
         Email email = new Email("qaws1@gmail.com");
@@ -89,6 +90,47 @@ class OrderRepositoryTest {
         });
     }
 
+    @Test //이메일로 고객의 상품 개수 수정
+    @Transactional
+    public void testUpdateQuantity() {
+
+    }
+
+    @Test //이메일로 고객의 ORDER_STATUS상태 변환
+    @Transactional
+    @Commit
+    public void testUpdtaeOrderStatus() {
+        Email email = new Email("qaws1@gmail.com");
+
+        // 이메일로 주문을 찾기
+        List<Order> foundOrders = orderRepository.findByEmailWithOrderItems(email);
+        assertNotNull(foundOrders, "Orders should be not null");
+        assertFalse(foundOrders.isEmpty(), "Orders should not be empty");
+
+        foundOrders.forEach(orders->{
+            orders.changeOrderStatus(OrderStatus.PAYMENT_CONFIRMED);
+            System.out.println("Order ID: " + orders.getOrderId());
+            System.out.println(orders.getOrderStatus());
+        });
+
+    }
+
+    @Test //이메일로 고객 주문 삭제
+    @Transactional
+    @Commit
+    public void testDeleteOrder() {
+        Email email = new Email("aba@naver.com");
+
+        // 이메일로 주문을 찾기
+        List<Order> foundOrders = orderRepository.findByEmailWithOrderItems(email);
+        assertNotNull(foundOrders, "Orders should be not null");
+        assertFalse(foundOrders.isEmpty(), "Orders should not be empty");
+
+        foundOrders.forEach(orders->{
+
+        });
+
+    }
 
 
 }

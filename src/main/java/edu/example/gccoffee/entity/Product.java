@@ -35,6 +35,14 @@ public class Product {
     @LastModifiedDate // 수정 시점에 자동 업데이트
     private LocalDateTime updateAt;
 
+    // 생성자
+    public Product(String productName, Category category, long price, String description) {
+        this.productName = productName;
+        this.category = category;
+        this.price = price;
+        this.description = description;
+    }
+
 
 //    public Product(Long productId) {
 //        this.productId = productId;

@@ -1,5 +1,6 @@
 package edu.example.gccoffee.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,7 +39,7 @@ public class Order {
     private List<OrderItem> orderItems = new ArrayList<>();
     // JPA는 Enum 값을 데이터베이스에 저장할 때 @Enumerated 어노테이션을 통해 어떻게 저장할지를 결정한다.
     @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
+    private OrderStatus orderStatus; ;
 
     @CreatedDate
     private LocalDateTime createAt;
